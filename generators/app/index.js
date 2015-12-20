@@ -1,4 +1,5 @@
 'use strict';
+
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
@@ -9,14 +10,14 @@ module.exports = yeoman.generators.Base.extend({
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the tiptop ' + chalk.red('generator-msvc') + ' generator!'
+      'Welcome to the tiptop ' + chalk.yellow('msvc') + ' generator!'
     ));
 
     var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
+      type: 'text',
+      name: 'orgName',
+      message: 'organization package name:',
+      default: 'intocloudtech'
     }];
 
     this.prompt(prompts, function (props) {
@@ -28,13 +29,50 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   writing: function () {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
-    );
+    [
+      ['Application.java', 'src/main/java/com/' + this.props.orgName + '/Application.java'],
+      ['Person.java', 'src/main/java/com/' + this.props.orgName + '/domain/Person.java'],
+      ['PersonService.java', 'src/main/java/com/' + this.props.orgName + '/services/PersonService.java'],
+      ['PersonServiceImpl.java', 'src/main/java/com/' + this.props.orgName + '/services/PersonServiceImpl.java'],
+      ['PeopleController.java', 'src/main/java/com/' + this.props.orgName + '/controllers/api/PeopleController.java'],
+      ['PersonRepository.java', 'src/main/java/com/' + this.props.orgName + '/dao/PersonRepository.java']
+    ].forEach(function(info) {
+      var src = info[0];
+      var dest = info[0];
+      if (info.length == 2) {
+        dest = info[1];
+      }
+
+      this.fs.copyTpl(
+        this.templatePath(src),
+        this.destinationPath(dest),
+        {
+          orgName: this.props.orgName
+        }
+      );
+    }, this);
+  },
+
+  projectfiles: function() {
+    [
+      ['build.gradle'],
+      ['gradlew'],
+      ['gradlew.bat'],
+      ['gradle/wrapper/gradle-wrapper.properties'],
+      ['gradle/wrapper/gradle-wrapper.jar']
+    ].forEach(function(info){
+      var src = info[0];
+      var dest = info[0];
+      if (info.length == 2) {
+        dest = info[1];
+      }
+
+      this.fs.copy(this.templatePath(src), this.destinationPath(dest));
+    }, this);
   },
 
   install: function () {
-    this.installDependencies();
+    //this.installDependencies();
+    this.spawnCommand('./gradlew', ['build']);
   }
 });
