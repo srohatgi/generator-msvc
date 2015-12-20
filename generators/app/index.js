@@ -36,10 +36,10 @@ module.exports = yeoman.generators.Base.extend({
       ['PersonServiceImpl.java', 'src/main/java/com/' + this.props.orgName + '/services/PersonServiceImpl.java'],
       ['PeopleController.java', 'src/main/java/com/' + this.props.orgName + '/controllers/api/PeopleController.java'],
       ['PersonRepository.java', 'src/main/java/com/' + this.props.orgName + '/dao/PersonRepository.java']
-    ].forEach(function(info) {
+    ].forEach(function (info) {
       var src = info[0];
       var dest = info[0];
-      if (info.length == 2) {
+      if (info.length === 2) {
         dest = info[1];
       }
 
@@ -53,17 +53,17 @@ module.exports = yeoman.generators.Base.extend({
     }, this);
   },
 
-  projectfiles: function() {
+  projectfiles: function () {
     [
       ['build.gradle'],
       ['gradlew'],
       ['gradlew.bat'],
       ['gradle/wrapper/gradle-wrapper.properties'],
       ['gradle/wrapper/gradle-wrapper.jar']
-    ].forEach(function(info){
+    ].forEach(function (info) {
       var src = info[0];
       var dest = info[0];
-      if (info.length == 2) {
+      if (info.length === 2) {
         dest = info[1];
       }
 
