@@ -29,13 +29,17 @@ module.exports = yeoman.generators.Base.extend({
   },
 
   writing: function () {
+    var folders = this.props.orgName.replace('.', '/');
     [
-      ['Application.java', 'src/main/java/com/' + this.props.orgName + '/Application.java'],
-      ['Person.java', 'src/main/java/com/' + this.props.orgName + '/domain/Person.java'],
-      ['PersonService.java', 'src/main/java/com/' + this.props.orgName + '/services/PersonService.java'],
-      ['PersonServiceImpl.java', 'src/main/java/com/' + this.props.orgName + '/services/PersonServiceImpl.java'],
-      ['PeopleController.java', 'src/main/java/com/' + this.props.orgName + '/controllers/api/PeopleController.java'],
-      ['PersonRepository.java', 'src/main/java/com/' + this.props.orgName + '/dao/PersonRepository.java']
+      ['Application.java', 'src/main/java/com/' + folders + '/Application.java'],
+      ['Person.java', 'src/main/java/com/' + folders + '/domain/Person.java'],
+      ['PersonService.java', 'src/main/java/com/' + folders + '/services/PersonService.java'],
+      ['PersonServiceImpl.java', 'src/main/java/com/' + folders + '/services/PersonServiceImpl.java'],
+      ['PeopleController.java', 'src/main/java/com/' + folders + '/controllers/api/PeopleController.java'],
+      ['PersonRepository.java', 'src/main/java/com/' + folders + '/dao/PersonRepository.java'],
+      ['application.properties', 'resources/application.properties'],
+      ['banner.txt', 'resources/banner.txt'],
+      ['logback.xml', 'resources/logback.xml']
     ].forEach(function (info) {
       var src = info[0];
       var dest = info[0];
@@ -55,6 +59,8 @@ module.exports = yeoman.generators.Base.extend({
 
   projectfiles: function () {
     [
+      ['_gitignore', '.gitignore'],
+      ['README.md'],
       ['build.gradle'],
       ['gradlew'],
       ['gradlew.bat'],
