@@ -6,8 +6,7 @@ var helpers = require('yeoman-generator').test;
 describe('generator-msvc:app', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../generators/app'))
-      .withOptions({someOption: true})
-      .withPrompts({someAnswer: true})
+      .withOptions({orgName: 'intocloudtech'})
       .on('end', done);
   });
 

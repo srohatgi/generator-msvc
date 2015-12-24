@@ -19,8 +19,8 @@ public class PeopleController {
         return personService.findPersonByFirstName("Joe");
     }
 
-    @RequestMapping(value = ":id", method = RequestMethod.GET)
-    public Person findPerson(@PathParam("id") String id) {
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    public Person findPerson(@PathVariable("id") String id) {
         return new Person();
     }
 
@@ -29,8 +29,8 @@ public class PeopleController {
         return person;
     }
 
-    @RequestMapping(value = ":id", method = RequestMethod.DELETE)
-    public void delete(@PathParam("id") String id) {
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("id") String id) {
 
     }
 
