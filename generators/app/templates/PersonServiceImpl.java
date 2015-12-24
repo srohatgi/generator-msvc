@@ -19,10 +19,37 @@ public class PersonServiceImpl implements PersonService {
     private PersonRepository personRepository;
 
     @Override
-    public List<Person> findPersonByFirstName(String fname) {
-        logger.debug("fname = {}", fname);
+    public List<Person> findPersonByLastName(String lastName) {
+        logger.debug("name = {}", lastName);
         List<Person> personList = new ArrayList<>();
-        personList.add(personRepository.findByFirstName(fname));
+        personList.addAll(personRepository.findByLastName(lastName));
         return personList;
     }
+
+    @Override
+    public Person add(Person person) {
+        personRepository.save(person);
+        return personRepository.findOne(person.getId());
+    }
+
+    @Override
+    public Person get(String id) {
+        return personRepository.findOne(id);
+    }
+
+    @Override
+    public Person update(Person person) {
+        if (personRepository.findOne(person.getId()) != null) {
+            personRepository.save(person);
+        }
+        return personRepository.findOne(person.getId());
+    }
+
+    @Override
+    public void delete(String id) {
+        if (personRepository.findOne(id) != null) {
+            personRepository.delete(id);
+        }
+    }
+
 }

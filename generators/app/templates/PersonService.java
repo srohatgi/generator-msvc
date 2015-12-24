@@ -1,13 +1,19 @@
 package com.<%=orgName%>.services;
 
-import com.<%=orgName%>.dao.PersonRepository;
 import com.<%=orgName%>.domain.Person;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public interface PersonService {
 
-    List<Person> findPersonByFirstName(String fname);
+    List<Person> findPersonByLastName(String name);
+
+    Person add(Person person);
+
+    Person get(String id);
+
+    Person update(Person person);
+
+    void delete(String id);
 
 }
