@@ -8,7 +8,7 @@ describe('generator-msvc:app', function () {
   before(function (done) {
     this.timeout(15000);
     helpers.run(path.join(__dirname, '../generators/app'))
-      .withOptions({orgName: 'intocloudtech'})
+      .withPrompts({orgName: 'intocloudtech'})
       .on('end', done);
   });
 

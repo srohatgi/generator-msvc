@@ -17,7 +17,7 @@ module.exports = yeoman.generators.Base.extend({
       type: 'text',
       name: 'orgName',
       message: 'organization package name:',
-      default: 'intocloudtech'
+      default: __dirname
     }];
 
     this.prompt(prompts, function (props) {
