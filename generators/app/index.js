@@ -31,15 +31,17 @@ module.exports = yeoman.generators.Base.extend({
   writing: function () {
     var folders = this.props.orgName.replace('.', '/');
     [
+      ['build.gradle', 'build.gradle'],
       ['Application.java', 'src/main/java/com/' + folders + '/Application.java'],
       ['Person.java', 'src/main/java/com/' + folders + '/domain/Person.java'],
       ['PersonService.java', 'src/main/java/com/' + folders + '/services/PersonService.java'],
       ['PersonServiceImpl.java', 'src/main/java/com/' + folders + '/services/PersonServiceImpl.java'],
       ['PeopleController.java', 'src/main/java/com/' + folders + '/controllers/api/PeopleController.java'],
       ['PersonRepository.java', 'src/main/java/com/' + folders + '/dao/PersonRepository.java'],
-      ['application.properties', 'resources/application.properties'],
-      ['banner.txt', 'resources/banner.txt'],
-      ['logback.xml', 'resources/logback.xml']
+      ['application.properties', 'src/main/resources/application.properties'],
+      ['banner.txt', 'src/main/resources/banner.txt'],
+      ['logback.xml', 'src/main/resources/logback.xml'],
+      ['101splunk-forwarder.config', 'src/main/resources/ebextensions/101splunk-forwarder.config']
     ].forEach(function (info) {
       var src = info[0];
       var dest = info[0];
@@ -61,7 +63,6 @@ module.exports = yeoman.generators.Base.extend({
     [
       ['_gitignore', '.gitignore'],
       ['README.md'],
-      ['build.gradle'],
       ['gradlew'],
       ['gradlew.bat'],
       ['gradle/wrapper/gradle-wrapper.properties'],
@@ -73,7 +74,9 @@ module.exports = yeoman.generators.Base.extend({
         dest = info[1];
       }
 
-      this.fs.copy(this.templatePath(src), this.destinationPath(dest));
+      this.fs.copy(
+        this.templatePath(src),
+        this.destinationPath(dest));
     }, this);
   },
 
